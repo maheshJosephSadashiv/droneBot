@@ -12,3 +12,5 @@ To run the virtual environment :
   run the command :
   ./telloenv/Scripts/Activate
   (make sure you are in the tello dir)
+  Follow this link for more info:
+  https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/
