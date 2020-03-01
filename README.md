@@ -5,8 +5,8 @@ any dependecies.
 
 The virtual environment is in the tello folder and  is named telloenv.
 
-#To run the virtual environment make sure you have virtualenv installed 
-if not run pip install virtualenv
+To run the virtual environment make sure you have virtualenv installed 
+If not run "pip install virtualenv"
 
 To run the virtual environment :
   run the command :
