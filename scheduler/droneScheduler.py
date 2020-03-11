@@ -53,27 +53,28 @@ class droneScheduler():
             self.destlist.append(items[i])
     
     def createList(self,no):
+
         if no == 1:
             for i in self.dronelist:
-                self.distlist.append(self.distance(i[0],i[1],self.itemlist[0][0],self.itemlist[0][1]))
-            return self.distlist
-        elif no == 2:
+                self.droneToItem.append(self.distance(i[0],i[1],self.itemlist[0][0],self.itemlist[0][1]))
 
+        elif no == 2:
             for i in range(len(self.itemlist)):
                 self.itemToDestination.append(self.distance(self.itemlist[i][0],self.itemlist[i][1],self.destlist[i][0],self.destlist[i][1]))
-            return self.itemToDestination
 
     
 
-    def newCheck(self):
+    def schedule(self):
+
         try:
 
             self.getdronelist()
             self.getitemlist()
             self.getdestinationlist()
-            self.droneToItem = self.createList(1)
-            self.itemToDestination = self.createList(2)
+            self.createList(1)
+            self.createList(2)
             li=[]
+
             for i in range(len(self.droneToItem)):
                 li.append( self.droneToItem[i] + self.itemToDestination[0] )    
 
@@ -93,8 +94,8 @@ class droneScheduler():
                     pos = self.destlist.pop(0)
                     self.dronelist[droneNo] = pos
                     if len(self.itemlist) != 0:
-                        self.droneToItem = self.createList(1)
-                        self.itemToDestination = self.createList(2)
+                        self.createList(1)
+                        self.createList(2)
                         for i in range(len(self.droneToItem)):
                             li.append( self.droneToItem[i] + self.itemToDestination[0] )
                     print('==============')
@@ -103,13 +104,5 @@ class droneScheduler():
             print('Check if both item and destination position is available')
 
 
-
-
-    def dispatcher(self):
-        self.newCheck()
-        #print(self.maplist)
-
-
-
 obj = droneScheduler()
-obj.dispatcher()
+obj.schedule()
