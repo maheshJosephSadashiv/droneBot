@@ -8,7 +8,6 @@ class droneScheduler():
 
     dronelist = []
     itemlist = []
-    distlist = []
     maplist= []
     destlist = []
     droneToItem= []
