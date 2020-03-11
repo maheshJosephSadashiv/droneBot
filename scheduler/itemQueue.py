@@ -24,19 +24,3 @@ class itemQueue():
     def getQueue(self):
         return self.queue
 
-# if __name__=='__main__':
-#     q = itemQueue()
-#     q.insert((1,2)) 
-#     q.insert((2,4)) 
-#     q.insert((5,7)) 
-    
-#     print("Initial queue") 
-#     print(q) 
-    
-#     print(q.delete()) 
-#     print(q.delete()) 
-#     print(q.delete()) 
-    
-#     print("\nQueue after removing elements") 
-#     print(q) 
-#     print(q.isEmpty())
