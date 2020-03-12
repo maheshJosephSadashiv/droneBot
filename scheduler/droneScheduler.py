@@ -61,7 +61,7 @@ class droneScheduler():
 
     def schedule(self):
 
-        # try:
+        try:
 
             self.getdronelist()
             self.getitemlist()
@@ -95,8 +95,8 @@ class droneScheduler():
                             li.append( self.droneToItem[i] + self.itemToDestination[0] )
                     print('==============')
         
-        # except:
-        #     print('Check if both item and destination position is available')
+        except:
+            print('Check if both item and destination position is available')
 
 
 obj = droneScheduler()
