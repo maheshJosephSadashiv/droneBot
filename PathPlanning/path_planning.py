@@ -1,9 +1,8 @@
-import threading 
+import threading
 import numpy as np
 import cv2
 import cv2.aruco as aruco
 import glob
-
 
 
 def callibrate_camera():
@@ -33,6 +32,9 @@ def callibrate_camera():
 def find_aruco_marker_by_id(ret, mtx, dist, rvecs, tvecs, id, cap):
     while (True):
         ret, frame = cap.read()
+        if np.shape(frame) == ():
+            break
+        frame = cv2.flip(frame, 1)
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         aruco_dict = aruco.Dictionary_get(aruco.DICT_6X6_250)
         parameters = aruco.DetectorParameters_create()
@@ -41,12 +43,12 @@ def find_aruco_marker_by_id(ret, mtx, dist, rvecs, tvecs, id, cap):
 
         font = cv2.FONT_HERSHEY_SIMPLEX #font for displaying text (below)
         if np.all(ids != None):
-            rvec, tvec,_ = aruco.estimatePoseSingleMarkers(corners[0], 0.05, mtx, dist) 
+            rvec, tvec, _ = aruco.estimatePoseSingleMarkers(corners[0], 0.05, mtx, dist)
             #(rvec-tvec).any() # get rid of that nasty numpy value array error
             if id in ids:
                 aruco.drawAxis(frame, mtx, dist, rvec[0], tvec[0], 0.1)
-                aruco.drawDetectedMarkers(frame, corners) 
-                cv2.putText(frame, "Id: " + str(ids), (0,64), font, 1, (0,255,0),2,cv2.LINE_AA)
+                aruco.drawDetectedMarkers(frame, corners)
+                cv2.putText(frame, "Id: " + str(id), (0, 64), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
 
         cv2.imshow('frame '+str(id),frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
