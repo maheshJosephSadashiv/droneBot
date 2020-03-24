@@ -1,4 +1,4 @@
-from tello.TelloSDKPy.djitellopy import Tello
+from tello.TelloSDK.djitellopy import Tello
 
 
 class TelloClass:
