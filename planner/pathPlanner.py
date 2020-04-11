@@ -26,6 +26,7 @@ class pathPanner:
 
     def updateDirection(self, turn):
         if turn=='r':
+            #TelloClass.tello_rotate_clockwise(90)
             print('Turned Right')
             self.direction = (self.direction+1)%4
         elif turn=='l':
