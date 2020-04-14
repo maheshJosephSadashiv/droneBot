@@ -1,8 +1,10 @@
-from collections import deque 
-from droneQueue import droneQueue
-from itemQueue import itemQueue  
-from destinationQueue import destinationQueue
 import math
+from collections import deque
+
+from destinationQueue import destinationQueue
+from droneQueue import droneQueue
+from itemQueue import itemQueue
+
 
 class droneScheduler():
 
@@ -68,7 +70,8 @@ class droneScheduler():
             self.createList(1)
             self.createList(2)
             li=[]
-
+            droneList = []
+            itemList = []
             for i in range(len(self.droneToItem)):
                 li.append( self.droneToItem[i] + self.itemToDestination[0] )    
 
@@ -78,6 +81,8 @@ class droneScheduler():
                     print('li',li)     
 
                     droneNo = li.index(min(li))
+                    droneList.append(droneNo)
+                    itemList.append(self.items[0])
                     print('Drone',droneNo,' =>Coordinates ',self.items[0] )
                     
                     li.clear()
@@ -93,7 +98,8 @@ class droneScheduler():
                         for i in range(len(self.droneToItem)):
                             li.append( self.droneToItem[i] + self.itemToDestination[0] )
                     print('==============')
-        
+            print(droneList)
+            print(itemList)
         except:
             print('Check if both item and destination position is available')
 
