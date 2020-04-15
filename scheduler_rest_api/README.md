@@ -1,5 +1,7 @@
 # Flask
 
+# Make sure that you have Python version 3.6 and above
+
 * First install virtualenv `pip install virtualenv`
 * Run `virtualenv venv` in the project root.
 * Run `.\venv\Scripts\Activate`
