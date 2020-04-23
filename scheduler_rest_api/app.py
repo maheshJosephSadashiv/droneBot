@@ -3,10 +3,12 @@ from flask import Flask
 from extensions import db, ma, scheduler
 from scheduler import droneScheduler
 from routes import bp
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
+CORS(app)
 db.init_app(app)
 ma.init_app(app)
 

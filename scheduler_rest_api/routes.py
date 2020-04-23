@@ -32,11 +32,12 @@ def set_status():
                      item_y=row["item_y"])
         db.session.add(item)
     db.session.commit()
-    return str(data), 200
+    return jsonify({"response": "Successful"}), 200
 
 
 @bp.route("/delete", strict_slashes=False, methods=['DELETE'])
 def delete_all():
     number_rows_deleted = db.session.query(Drone).delete()
     db.session.commit()
-    return "Number of rows deleted {}".format(number_rows_deleted), 200
+
+    return jsonify({"no_of_rows": number_rows_deleted}), 200
