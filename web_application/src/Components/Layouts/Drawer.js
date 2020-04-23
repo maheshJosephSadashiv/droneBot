@@ -7,12 +7,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import {mainListItems} from './ListItems';
+import Scheduler from '../Scheduler'
+import CreateTask from '../CreateTask'
+import MainListItems from './ListItems';
 
 
 const drawerWidth = 240;
@@ -41,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PermanentDrawerLeft() {
+function DrawerLeft(props) {
   const classes = useStyles();
 
   return (
@@ -65,15 +62,60 @@ export default function PermanentDrawerLeft() {
         <div className={classes.toolbar} />
         <Divider />
         <List>
-          {mainListItems}
+          <div>
+            <MainListItems onClickHandler={props.onClickHandler} handlerCreateTask={props.handlerCreateTask}/>
+          </div>
         </List>
         <Divider />
-        
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-    
+        <Scheduler displayDBInfo={props.displayDBInfo} a/>
+        <CreateTask displayCreatTask={props.createTaskInfo} a/>
       </main>
     </div>
   );
+}
+
+ 
+export default class PermanentDrawerLeft extends (React.Component){
+  
+  constructor(){
+    super()
+    this.state = {
+      displayDBInfo : false,
+      createTaskInfo : false
+    }
+    this.clickedHandler = this.clickedHandler.bind(this)
+    this.handlerCreateTask = this.handlerCreateTask.bind(this)
+  }
+
+  handlerCreateTask(){
+    if(this.state.createTaskInfo)
+    this.setState({
+      createTaskInfo : false
+    })
+  else
+    this.setState({
+      createTaskInfo : true
+    })
+  }
+
+  clickedHandler(){
+    if(this.state.displayDBInfo)
+      this.setState({
+        displayDBInfo : false
+      })
+    else
+      this.setState({
+        displayDBInfo : true
+      })
+ }
+
+  render(){
+    return <DrawerLeft displayDBInfo={this.state.displayDBInfo}
+                       onClickHandler={this.clickedHandler}
+                       createTaskInfo={this.state.createTaskInfo}
+                       handlerCreateTask={this.handlerCreateTask}/>
+  }
 }
