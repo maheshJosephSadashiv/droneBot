@@ -2,9 +2,8 @@ from flask import Blueprint, jsonify, request
 from extensions import db
 from model.drone_table import Drone, drone_schema, drones_schema
 
+
 bp = Blueprint("routes", __name__)
-
-
 @bp.route("/health", strict_slashes=False)
 def health_check():
     return "Success", 200
@@ -27,9 +26,9 @@ def set_status():
     data = request.json
     for row in data:
         item = Drone(destination_x=row["destination_x"],
-                     destination_y=row["destination_y"],
-                     item_x=row["item_x"],
-                     item_y=row["item_y"])
+                    destination_y=row["destination_y"],
+                    item_x=row["item_x"],
+                    item_y=row["item_y"])
         db.session.add(item)
     db.session.commit()
     return jsonify({"response": "Successful"}), 200
