@@ -53,9 +53,31 @@ export default class CreateTask extends(React.Component){
             destination_y : parseInt(event.target.value, 10)
         })
     }
+    validate = () => {
+
+
+        if(!this.state.item_x || !this.state.item_y || !this.state.destination_x || !this.state.destination_y){
+            alert("The coordinates cannot be Null Or String")
+            return false;
+        }
+        if(!Number.isInteger(this.state.item_x)){
+            alert("The Cordinates cannot be String")
+            return false;
+        }
+
+        if(this.state.item_x<0 || this.state.item_y<0 || this.state.destination_x<0 || this.state.destination_y<0){
+           alert("The coordinates cannot be negative")
+           return false;
+        }
+           return true;
+     };
 
     submitHandler(){
+        const isValid = this.validate();
+        if(isValid)
+        {
         console.log(this.state)
+        alert("Successfully added to the Scheduler")
         var requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -67,6 +89,7 @@ export default class CreateTask extends(React.Component){
         fetch('http://127.0.0.1:5000/setstatus', requestOptions)
             .then(response => response.json())
             .then(data => this.setState({ isLoaded: true}));
+         }
     }
 
     componentDidMount(){
